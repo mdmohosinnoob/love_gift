@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, #b3123f, #5a0620 70%, #2a0210);
+  font-family: 'Dancing Script', cursive;
+}
+
+#hearts {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.loader {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: clamp(1.4rem, 5vw, 2.2rem);
+  color: rgba(255, 220, 230, 0.85);
+  transition: opacity 1s ease;
+}
+
+.loader.hide { opacity: 0; }
+
+/* ---------- Screen 2: love card ---------- */
+.card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(88vw, 360px);
+  padding: 28px 22px;
+  text-align: center;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+  transition: opacity 1s ease;
+}
+
+.card.hidden { opacity: 0; pointer-events: none; }
+
+.pic { font-size: 4rem; margin-bottom: 8px; }
+.tag { font-size: 1rem; opacity: 0.8; }
+.card h1 { font-size: 2.6rem; margin: 6px 0; font-weight: 500; }
+.sub { font-size: 1.1rem; opacity: 0.85; margin-bottom: 20px; }
+
+.buttons { display: flex; gap: 14px; justify-content: center; }
+
+.btn {
+  font-family: inherit;
+  font-size: 1.2rem;
+  padding: 10px 26px;
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.yes { background: #ff2e63; box-shadow: 0 0 16px rgba(255, 46, 99, 0.6); }
+.no  { background: rgba(255, 255, 255, 0.2); }
+
+/* ---------- Screen 3: gift ---------- */
+.gift {
+  font-size: 4.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  animation: wiggle 1.2s ease-in-out infinite;
+}
+.gift.open { animation: none; }
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-6deg); }
+  50%      { transform: rotate(6deg); }
+}
+
+.note { font-size: 1.6rem; margin-top: 12px; }
+
+.fire { margin-top: 16px; font-size: 1.1rem; }
+
+/* ---------- Screen 4: night sky ---------- */
+html.night, html.night body {
+  background: radial-gradient(circle at 50% 20%, #1b1040, #07031a 60%, #000);
+}
+
+.sky {
+  position: fixed;
+  top: 6vh;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  pointer-events: none;   /* taps pass through to the canvas */
+  transition: opacity 1s ease;
+}
+.sky.hidden { opacity: 0; }
+.sky h2 { font-size: clamp(2rem, 7vw, 3rem); font-weight: 500; }
+.sky p { font-family: sans-serif; font-size: 0.95rem; opacity: 0.8; margin: 6px 0 16px; }
+
+.ghost {
+  background: rgba(255, 255, 255, 0.15);
+  font-size: 1rem;
+  pointer-events: auto;   /* the button itself stays clickable */
+}
+.sky.hidden .ghost { pointer-events: none; }
+
+/* ---------- Polish ---------- */
+.loader { text-shadow: 0 0 20px rgba(255, 120, 160, 0.9); animation: glow 1.8s ease-in-out infinite; }
+@keyframes glow { 50% { text-shadow: 0 0 36px rgba(255, 150, 190, 1); } }
+
+.card {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.06));
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35),
+              0 0 60px rgba(255, 46, 99, 0.25),
+              inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+.card:not(.hidden) { animation: cardIn 0.9s ease both; }
+@keyframes cardIn {
+  from { opacity: 0; transform: translate(-50%, -46%) scale(0.94); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.card h1 { font-size: 2.9rem; text-shadow: 0 0 18px rgba(255, 120, 160, 0.8); }
+
+.pic { animation: bob 3s ease-in-out infinite; filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35)); }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+.btn { transition: transform 0.2s ease; }
+.btn:hover { transform: scale(1.06); }
+.yes { animation: pulse 1.8s ease-in-out infinite; }
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 14px rgba(255, 46, 99, 0.55); }
+  50%      { box-shadow: 0 0 30px rgba(255, 46, 99, 0.95); }
+}
+
+/* "No" glides slowly instead of jumping (change 0.9s to make it faster/slower) */
+.no { transition: left 0.9s ease, top 0.9s ease, transform 0.2s ease; }
+
+.gift { filter: drop-shadow(0 0 18px rgba(255, 200, 80, 0.9)); }
+.gift.open { filter: drop-shadow(0 0 20px rgba(255, 80, 130, 0.9)); }
+
+.note {
+  font-family: 'Tiro Bangla', serif;
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.7;
+  margin-top: 14px;
+  text-shadow: 0 0 14px rgba(255, 120, 160, 0.7);
+}
+.note small { display: block; margin-top: 8px; font-size: 1.05rem; opacity: 0.85; }
+.note:not([hidden]) { animation: fadeUp 1.6s ease both; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pic, .yes, .gift, .loader { animation: none; }
+}
+
+/* ---------- Shooting star wish ---------- */
+.sky .wish { font-family: 'Tiro Bangla', serif; font-style: italic; font-size: 1.1rem; opacity: 0.9; margin: -6px 0 14px; }
+
+.note { min-height: 7rem; }          /* keeps the card from jumping while typing */
+.gift.open { pointer-events: none; } /* the gift can be opened only once */
+
+/* ---------- Couple photo in a heart ---------- */
+.couple { width: min(62vw, 270px); margin: 12px auto 0; }
+
+.heart-wrap {
+  filter: drop-shadow(0 0 22px rgba(255, 70, 120, 0.85));  /* glow (must be on the parent of the clipped shape) */
+  animation: beat 2.4s ease-in-out infinite;
+}
+
+.heart-frame {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  clip-path: url(#heartShape);
+  background: linear-gradient(135deg, #ffb3c6, #ff2e63);   /* the pink border */
+}
+
+.heart-photo {
+  position: absolute;
+  inset: 3.5%;
+  clip-path: url(#heartShape);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  font-size: 4rem;
+  background: radial-gradient(circle, #3a1230, #1a0820);   /* shows while no photo is added */
+}
+
+.heart-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sky .caption {
+  font-family: 'Tiro Bangla', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  opacity: 1;
+  margin: 10px 0 0;
+  text-shadow: 0 0 14px rgba(255, 120, 160, 0.8);
+}
+
+/* heartbeat: two quick pulses, then rest */
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  14%      { transform: scale(1.06); }
+  28%      { transform: scale(1); }
+  42%      { transform: scale(1.06); }
+  70%      { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) { .heart-wrap { animation: none; } }
+
+.sky .together {
+  font-family: 'Tiro Bangla', serif;
+  font-size: 1rem;
+  opacity: 0.85;
+  margin: 6px 0 0;
+}
+
+.btn { touch-action: manipulation; }   /* no double-tap zoom on phones */
