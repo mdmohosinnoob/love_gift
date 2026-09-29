@@ -237,3 +237,12 @@ html.night, html.night body {
 }
 
 .btn { touch-action: manipulation; }   /* no double-tap zoom on phones */
+
+/* counter stays on one line (centered even though the photo box is narrower) */
+.sky .together {
+  width: 92vw;
+  max-width: 460px;
+  margin: 6px 0 0 50%;
+  transform: translateX(-50%);
+  font-size: 0.95rem;
+}

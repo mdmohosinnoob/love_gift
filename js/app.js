@@ -269,6 +269,7 @@ fireBtn.addEventListener('click', () => {
   sky.classList.remove('hidden');
   document.documentElement.classList.add('night');
   isNight = true;
+  playSong(SKY_SONG);
 });
 
 backBtn.addEventListener('click', () => {
@@ -276,6 +277,7 @@ backBtn.addEventListener('click', () => {
   gift.classList.remove('hidden');
   document.documentElement.classList.remove('night');
   isNight = false;
+  playSong(MAIN_SONG);
 });
 
 // Tap on the sky (canvas) launches a firework, only while the sky screen is visible
@@ -312,3 +314,13 @@ function updateTogether() {
 }
 updateTogether();
 setInterval(updateTogether, 1000);
+
+// ---------- Optional: a different song for the night sky ----------
+const MAIN_SONG = music.getAttribute('src');   // the song from index.html (music5.mp3)
+const SKY_SONG = 'music5.mp3';   // put another file name here, e.g. 'music6.mp3'. Empty = keep the same song
+
+function playSong(src) {
+  if (!src || music.getAttribute('src') === src) return;   // nothing to change
+  music.src = src;
+  music.play().catch(err => console.error('Music play error:', err.name, err.message));
+}
